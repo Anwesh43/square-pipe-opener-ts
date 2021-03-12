@@ -208,3 +208,26 @@ class SquarePipeOpener {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    spo : SquarePipeOpener = new SquarePipeOpener()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.spo.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.spo.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.spo.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+
+}
