@@ -4,7 +4,7 @@ const parts : number = 4
 const scGap : number = 0.02 / parts 
 const strokeFactor : number = 90 
 const sizeFactor : number = 9.8 
-const backColor : string = ""
+const backColor : string = "#BDBDBD"
 const delay : number = 20 
 const rot : number = Math.PI / 2
 const colors : Array<string> = [
@@ -48,6 +48,7 @@ class DrawingUtil {
         const sf4 : number = ScaleUtil.divideScale(sf, 3, parts)
         context.save()
         context.translate(w / 2, h - (h / 2 - size) * sf3)
+        context.rotate(rot * sf4)
         context.fillRect(-size / 2, -size * sf1, size, size * sf1)
         for (var j = 0; j < 2; j++) {
             DrawingUtil.drawLine(
@@ -65,6 +66,7 @@ class DrawingUtil {
         context.lineCap = 'round'
         context.lineWidth = Math.min(w, h) / strokeFactor 
         context.strokeStyle = colors[i]
+        context.fillStyle = colors[i]
         DrawingUtil.drawSquarePipeOpener(context, scale)
     }
 }
